@@ -1,16 +1,16 @@
 cabal-version: 1.18
 
--- This file has been generated from package.yaml by hpack version 0.35.1.
+-- This file has been generated from package.yaml by hpack version 0.35.2.
 --
 -- see: https://github.com/sol/hpack
 
-name:           haskell-library-template
+name:           amazonka-mtl
 version:        0.0.0.0
 synopsis:       [synopsis]
 description:    Please see README.md
 category:       Utils
-homepage:       https://github.com/freckle/haskell-library-template#readme
-bug-reports:    https://github.com/freckle/haskell-library-template/issues
+homepage:       https://github.com/freckle/amazonka-mtl#readme
+bug-reports:    https://github.com/freckle/amazonka-mtl/issues
 maintainer:     Freckle Education
 license:        MIT
 license-file:   LICENSE
@@ -23,11 +23,11 @@ extra-doc-files:
 
 source-repository head
   type: git
-  location: https://github.com/freckle/haskell-library-template
+  location: https://github.com/freckle/amazonka-mtl
 
 library
   other-modules:
-      Paths_haskell_library_template
+      Paths_amazonka_mtl
   hs-source-dirs:
       library
   default-extensions:
@@ -68,7 +68,7 @@ test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Paths_haskell_library_template
+      Paths_amazonka_mtl
   hs-source-dirs:
       tests
   default-extensions:

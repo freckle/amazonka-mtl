@@ -1,17 +1,17 @@
-# haskell-library-template
+# amazonka-mtl
 
 Haskell library template used at Freckle.
 
 ## Create your repo
 
 ```sh
-gh repo create --template freckle/haskell-library-template --public freckle/<name>
+gh repo create --template freckle/amazonka-mtl --public freckle/<name>
 ```
 
 ## Rename your package
 
 ```sh
-sed -i s/haskell-library-template/my-name/ ./**/*
+sed -i s/amazonka-mtl/my-name/ ./**/*
 ```
 
 ## Enable release
