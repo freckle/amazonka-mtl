@@ -3,7 +3,42 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: amazonka-2.0@sha256:3481da2fda6b210d15d41c1db7a588adf68123cfb7ea3882797a6230003259db,3505
+    pantry-tree:
+      sha256: 01c7121bd5e4a3918a71ea6502412292c97facf20c9620f07af96e423d6437e2
+      size: 1528
+  original:
+    hackage: amazonka-2.0
+- completed:
+    hackage: amazonka-core-2.0@sha256:d9f0533c272ac92bd7b18699077038b6b51b3552e91b65743af4ce646286b4f8,4383
+    pantry-tree:
+      sha256: 46e7e4de910b08ee2df98db9cda2becf388ce49510024018289a46c43e175ee0
+      size: 3222
+  original:
+    hackage: amazonka-core-2.0
+- completed:
+    hackage: amazonka-s3-2.0@sha256:e3143e11ab9e57ee0dfd9d1dd95a44c5b4a7d34af78c8f5b2e6c00afad118a02,13853
+    pantry-tree:
+      sha256: 49f801400582ef0ca290312243b55e6e3c540c0c94c1a3110735bc400386fefb
+      size: 38690
+  original:
+    hackage: amazonka-s3-2.0
+- completed:
+    hackage: amazonka-sso-2.0@sha256:902be13b604e4a3b51a9b8e1adc6a32f42322ae11f738a72a8c737b2d0a91a5e,2995
+    pantry-tree:
+      sha256: f87dd959a78bf54295bd6f8c7da58f7f8f860251d5548ecb05ab758e03cba50b
+      size: 1817
+  original:
+    hackage: amazonka-sso-2.0
+- completed:
+    hackage: amazonka-sts-2.0@sha256:5c721083e8d80883a893176de6105c27bbbd8176f467c27ac5f8d548a5e726d8,3209
+    pantry-tree:
+      sha256: bde4691af7cac74e0a3705271b4d3ac05515863bfb6f668112e3f3950a27cb41
+      size: 2880
+  original:
+    hackage: amazonka-sts-2.0
 snapshots:
 - completed:
     sha256: 64d66303f927e87ffe6b8ccf736229bf608731e80d7afdf62bdd63c59f857740

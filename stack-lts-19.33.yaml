@@ -1,1 +1,15 @@
 resolver: lts-19.33
+extra-deps:
+  - Blammo-1.1.2.1
+  - amazonka-2.0
+  - amazonka-core-2.0
+  - amazonka-s3-2.0
+  - amazonka-sso-2.0
+  - amazonka-sts-2.0
+
+  # For Blammo
+  - context-0.2.0.1
+  - monad-logger-aeson-0.4.1.1
+
+  # For amazonka-core
+  - crypton-0.33

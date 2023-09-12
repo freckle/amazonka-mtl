@@ -6,8 +6,50 @@ cabal-version: 1.18
 
 name:           amazonka-mtl
 version:        0.0.0.0
-synopsis:       [synopsis]
-description:    Please see README.md
+synopsis:       MTL-style type-class and deriving-via newtypes for Amazonka
+description:    This package allows incorporation of AWS actions into any MTL-style function,
+                .
+                > import Amazonka.Data.Text (ToText(..))
+                > import Amazonka.S3.ListObjects
+                > import Amazonka.S3.Types.Object
+                > import Blammo.Logging
+                > import Conduit
+                > import Control.Lens hiding ((.=))
+                > import Control.Monad.AWS as AWS
+                >
+                > someAction
+                >   :: ( MonadIO m
+                >      , MonadLogger m
+                >      , MonadAWS m
+                >      , MonadReader env m
+                >      , HasSettings env
+                >      )
+                >   => m ()
+                > someAction = do
+                >   Settings {..} <- view settingsL
+                >
+                >   keys <-
+                >     runConduit
+                >       $ paginate (newListObjects settingsBucketName)
+                >       .| concatMapC (^. listObjectsResponse_contents)
+                >       .| concatC
+                >       .| mapC (^. object_key . to toText)
+                >       .| iterMC (\k -> logDebug $ k :# [])
+                >       .| sinkList
+                >
+                >   logInfo $ "Bucket contents" :# ["keys" .= keys]
+                .
+                This package also provides a number of options for execution:
+                .
+                * Through a concrete transformer: "Control.Monad.AWS.EnvT"
+                * Through your own reader env and deriving-via: "Control.Monad.AWS.ViaReader"
+                .
+                This package also provides mechanisms for mocking AWS in tests:
+                .
+                * Through a concrete transformer: "Control.Monad.AWS.MockT"
+                * Through your own reader env and deriving-via: "Control.Monad.AWS.ViaMock"
+                .
+                Please see individual module documentation for all the details.
 category:       Utils
 homepage:       https://github.com/freckle/amazonka-mtl#readme
 bug-reports:    https://github.com/freckle/amazonka-mtl/issues
@@ -26,6 +68,14 @@ source-repository head
   location: https://github.com/freckle/amazonka-mtl
 
 library
+  exposed-modules:
+      Control.Monad.AWS
+      Control.Monad.AWS.Class
+      Control.Monad.AWS.EnvT
+      Control.Monad.AWS.Matchers
+      Control.Monad.AWS.MockT
+      Control.Monad.AWS.ViaMock
+      Control.Monad.AWS.ViaReader
   other-modules:
       Paths_amazonka_mtl
   hs-source-dirs:
@@ -57,7 +107,61 @@ library
       TypeFamilies
   ghc-options: -Weverything -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-unsafe -Wno-safe
   build-depends:
-      base <5
+      amazonka
+    , amazonka-core
+    , base <5
+    , conduit
+    , lens
+    , mtl
+    , resourcet
+    , unliftio-core
+  default-language: Haskell2010
+  if impl(ghc >= 9.2)
+    ghc-options: -Wno-missing-kind-signatures
+  if impl(ghc >= 8.10)
+    ghc-options: -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module
+
+test-suite readme
+  type: exitcode-stdio-1.0
+  main-is: README.lhs
+  other-modules:
+      Paths_amazonka_mtl
+  default-extensions:
+      BangPatterns
+      DataKinds
+      DeriveAnyClass
+      DeriveFoldable
+      DeriveFunctor
+      DeriveGeneric
+      DeriveLift
+      DeriveTraversable
+      DerivingStrategies
+      FlexibleContexts
+      FlexibleInstances
+      GADTs
+      GeneralizedNewtypeDeriving
+      LambdaCase
+      MultiParamTypeClasses
+      NoImplicitPrelude
+      NoMonomorphismRestriction
+      OverloadedStrings
+      RankNTypes
+      RecordWildCards
+      ScopedTypeVariables
+      StandaloneDeriving
+      TypeApplications
+      TypeFamilies
+  ghc-options: -Weverything -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-unsafe -Wno-safe -pgmL markdown-unlit
+  build-depends:
+      Blammo
+    , amazonka-core
+    , amazonka-mtl
+    , amazonka-s3
+    , base <5
+    , conduit
+    , lens
+    , markdown-unlit
+    , mtl
   default-language: Haskell2010
   if impl(ghc >= 9.2)
     ghc-options: -Wno-missing-kind-signatures
@@ -68,6 +172,7 @@ test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Control.Monad.AWSSpec
       Paths_amazonka_mtl
   hs-source-dirs:
       tests
@@ -98,8 +203,14 @@ test-suite spec
       TypeFamilies
   ghc-options: -Weverything -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-unsafe -Wno-safe -threaded -rtsopts "-with-rtsopts=-N"
   build-depends:
-      base <5
+      amazonka-core
+    , amazonka-mtl
+    , amazonka-s3
+    , base <5
     , hspec
+    , lens
+    , text
+    , time
   default-language: Haskell2010
   if impl(ghc >= 9.2)
     ghc-options: -Wno-missing-kind-signatures
