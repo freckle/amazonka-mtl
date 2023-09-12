@@ -3,8 +3,51 @@ version: 0.0.0.0
 maintainer: Freckle Education
 category: Utils
 github: freckle/amazonka-mtl
-synopsis: "[synopsis]"
-description: Please see README.md
+synopsis: MTL-style type-class and deriving-via newtypes for Amazonka
+description: |
+  This package allows incorporation of AWS actions into any MTL-style function,
+
+  > import Amazonka.Data.Text (ToText(..))
+  > import Amazonka.S3.ListObjects
+  > import Amazonka.S3.Types.Object
+  > import Blammo.Logging
+  > import Conduit
+  > import Control.Lens hiding ((.=))
+  > import Control.Monad.AWS as AWS
+  >
+  > someAction
+  >   :: ( MonadIO m
+  >      , MonadLogger m
+  >      , MonadAWS m
+  >      , MonadReader env m
+  >      , HasSettings env
+  >      )
+  >   => m ()
+  > someAction = do
+  >   Settings {..} <- view settingsL
+  >
+  >   keys <-
+  >     runConduit
+  >       $ paginate (newListObjects settingsBucketName)
+  >       .| concatMapC (^. listObjectsResponse_contents)
+  >       .| concatC
+  >       .| mapC (^. object_key . to toText)
+  >       .| iterMC (\k -> logDebug $ k :# [])
+  >       .| sinkList
+  >
+  >   logInfo $ "Bucket contents" :# ["keys" .= keys]
+
+  This package also provides a number of options for execution:
+
+  * Through a concrete transformer: "Control.Monad.AWS.EnvT"
+  * Through your own reader env and deriving-via: "Control.Monad.AWS.ViaReader"
+
+  This package also provides mechanisms for mocking AWS in tests:
+
+  * Through a concrete transformer: "Control.Monad.AWS.MockT"
+  * Through your own reader env and deriving-via: "Control.Monad.AWS.ViaMock"
+
+  Please see individual module documentation for all the details.
 
 extra-doc-files:
   - README.md
@@ -62,6 +105,14 @@ default-extensions:
 
 library:
   source-dirs: library
+  dependencies:
+    - amazonka
+    - amazonka-core
+    - conduit
+    - lens
+    - mtl
+    - resourcet
+    - unliftio-core
 
 tests:
   spec:
@@ -69,5 +120,23 @@ tests:
     source-dirs: tests
     ghc-options: -threaded -rtsopts "-with-rtsopts=-N"
     dependencies:
-      #- amazonka-mtl
+      - amazonka-core
+      - amazonka-mtl
+      - amazonka-s3
       - hspec
+      - lens
+      - text
+      - time
+
+  readme:
+    main: README.lhs
+    ghc-options: -pgmL markdown-unlit
+    dependencies:
+      - Blammo
+      - amazonka-core
+      - amazonka-mtl
+      - amazonka-s3
+      - conduit
+      - lens
+      - markdown-unlit
+      - mtl

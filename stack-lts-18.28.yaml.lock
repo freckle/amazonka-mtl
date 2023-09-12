@@ -3,10 +3,73 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: Blammo-1.1.2.1@sha256:b74d553fb3557bb10381b806bd34b8bad0b800883f02dfd1cc847f58db40958c,4084
+    pantry-tree:
+      sha256: bd28931f07beaaae8565a87d8c3b55d3e9ff5c332ae93dc32c1090a4c814e620
+      size: 1567
+  original:
+    hackage: Blammo-1.1.2.1
+- completed:
+    hackage: amazonka-2.0@sha256:3481da2fda6b210d15d41c1db7a588adf68123cfb7ea3882797a6230003259db,3505
+    pantry-tree:
+      sha256: 01c7121bd5e4a3918a71ea6502412292c97facf20c9620f07af96e423d6437e2
+      size: 1528
+  original:
+    hackage: amazonka-2.0
+- completed:
+    hackage: amazonka-core-2.0@sha256:d9f0533c272ac92bd7b18699077038b6b51b3552e91b65743af4ce646286b4f8,4383
+    pantry-tree:
+      sha256: 46e7e4de910b08ee2df98db9cda2becf388ce49510024018289a46c43e175ee0
+      size: 3222
+  original:
+    hackage: amazonka-core-2.0
+- completed:
+    hackage: amazonka-s3-2.0@sha256:e3143e11ab9e57ee0dfd9d1dd95a44c5b4a7d34af78c8f5b2e6c00afad118a02,13853
+    pantry-tree:
+      sha256: 49f801400582ef0ca290312243b55e6e3c540c0c94c1a3110735bc400386fefb
+      size: 38690
+  original:
+    hackage: amazonka-s3-2.0
+- completed:
+    hackage: amazonka-sso-2.0@sha256:902be13b604e4a3b51a9b8e1adc6a32f42322ae11f738a72a8c737b2d0a91a5e,2995
+    pantry-tree:
+      sha256: f87dd959a78bf54295bd6f8c7da58f7f8f860251d5548ecb05ab758e03cba50b
+      size: 1817
+  original:
+    hackage: amazonka-sso-2.0
+- completed:
+    hackage: amazonka-sts-2.0@sha256:5c721083e8d80883a893176de6105c27bbbd8176f467c27ac5f8d548a5e726d8,3209
+    pantry-tree:
+      sha256: bde4691af7cac74e0a3705271b4d3ac05515863bfb6f668112e3f3950a27cb41
+      size: 2880
+  original:
+    hackage: amazonka-sts-2.0
+- completed:
+    hackage: context-0.2.0.1@sha256:b5a1390a5ad11b7edd0449c9ef96823f082bff4988bd09583e37a4e93e9aad10,1891
+    pantry-tree:
+      sha256: ebb043dd007864588c6b1676a0d30e521deab4353a3f19716f6f6f7d52b62817
+      size: 952
+  original:
+    hackage: context-0.2.0.1
+- completed:
+    hackage: monad-logger-aeson-0.4.1.1@sha256:14d41c7938cf97408c2e5124897a49224f49ba421f019a5f6f23c822640ce4ea,6203
+    pantry-tree:
+      sha256: b87db9367d14793faab83b3e892e34669f0431aac94ba454bd209eb7bd029901
+      size: 7096
+  original:
+    hackage: monad-logger-aeson-0.4.1.1
+- completed:
+    hackage: crypton-0.33@sha256:5e92f29b9b7104d91fcdda1dec9400c9ad1f1791c231cc41ceebd783fb517dee,18202
+    pantry-tree:
+      sha256: 38809499d7f9775ef45cd29ab5c3dc9b283a813f34c1cdc56681b24f8cf8bb4f
+      size: 23148
+  original:
+    hackage: crypton-0.33
 snapshots:
 - completed:
+    sha256: 428ec8d5ce932190d3cbe266b9eb3c175cd81e984babf876b64019e2cbe4ea68
     size: 590100
     url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/28.yaml
-    sha256: 428ec8d5ce932190d3cbe266b9eb3c175cd81e984babf876b64019e2cbe4ea68
   original: lts-18.28
