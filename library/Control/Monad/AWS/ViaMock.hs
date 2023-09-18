@@ -63,6 +63,9 @@ import Control.Monad.AWS.Matchers
 import Control.Monad.IO.Class (MonadIO)
 import Control.Monad.Reader (MonadReader (..))
 
+-- |
+--
+-- @since 0.1.0.0
 newtype MockAWS m a = MockAWS
   { unMockAWS :: m a
   }

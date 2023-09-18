@@ -23,17 +23,29 @@ import Data.Typeable (Typeable)
 -- - "Control.Monad.AWS.ViaReader"
 -- - "Control.Monad.AWS.ViaMock"
 class Monad m => MonadAWS m where
+  -- |
+  --
+  -- @since 0.1.0.0
   sendEither
     :: (AWSRequest a, Typeable a, Typeable (AWSResponse a))
     => a
     -> m (Either Error (AWSResponse a))
 
+  -- |
+  --
+  -- @since 0.1.0.0
   awaitEither
     :: (AWSRequest a, Typeable a)
     => Waiter.Wait a
     -> a
     -> m (Either Error Waiter.Accept)
 
+  -- |
+  --
+  -- @since 0.1.1.0
   withAuth :: (AuthEnv -> m a) -> m a
 
+  -- |
+  --
+  -- @since 0.1.1.0
   modified :: (Env -> Env) -> m a -> m a

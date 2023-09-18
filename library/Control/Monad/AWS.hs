@@ -26,6 +26,8 @@ import qualified Data.Conduit as Conduit
 import Data.Typeable (Typeable)
 
 -- | Version of 'Amazonka.send' built on our 'sendEither'
+--
+-- @since 0.1.0.0
 send
   :: ( MonadIO m
      , MonadAWS m
@@ -38,6 +40,8 @@ send
 send = sendEither >=> hoistEither
 
 -- | Version of 'Amazonka.paginateEither' built on our 'sendEither'
+--
+-- @since 0.1.0.0
 paginateEither
   :: (MonadAWS m, AWSPager a, Typeable a, Typeable (AWSResponse a))
   => a
@@ -52,6 +56,8 @@ paginateEither = go
         maybe (pure (Right ())) go (Pager.page rq rs)
 
 -- | Version of 'Amazonka.paginate' built on our 'paginateEither'
+--
+-- @since 0.1.0.0
 paginate
   :: ( MonadIO m
      , MonadAWS m
@@ -65,6 +71,8 @@ paginate =
   paginateEither >=> hoistEither
 
 -- | Version of 'Amazonka.await' built on our 'awaitEither'
+--
+-- @since 0.1.0.0
 await
   :: (MonadIO m, MonadAWS m, AWSRequest a, Typeable a)
   => Waiter.Wait a

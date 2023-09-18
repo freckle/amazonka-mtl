@@ -33,6 +33,9 @@ import Control.Monad.AWS.ViaReader
 import Control.Monad.Reader
 import Control.Monad.Trans.Resource
 
+-- |
+--
+-- @since 0.1.0.0
 newtype EnvT m a = EnvT
   { unEnvT :: ReaderT Env (ResourceT m) a
   }
@@ -47,5 +50,8 @@ newtype EnvT m a = EnvT
     )
   deriving (MonadAWS) via (ReaderAWS (EnvT m))
 
+-- |
+--
+-- @since 0.1.0.0
 runEnvT :: MonadUnliftIO m => EnvT m a -> Env -> m a
 runEnvT f = runResourceT . runReaderT (unEnvT f)
