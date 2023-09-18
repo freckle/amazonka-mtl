@@ -5,7 +5,9 @@ where
 
 import Amazonka.Prelude
 
+import Amazonka (AuthEnv)
 import Amazonka.Core (AWSRequest, AWSResponse, Error)
+import Amazonka.Env (Env)
 import qualified Amazonka.Waiter as Waiter
 import Data.Typeable (Typeable)
 
@@ -31,3 +33,7 @@ class Monad m => MonadAWS m where
     => Waiter.Wait a
     -> a
     -> m (Either Error Waiter.Accept)
+
+  withAuth :: (AuthEnv -> m a) -> m a
+
+  modified :: (Env -> Env) -> m a -> m a

@@ -57,6 +57,7 @@ module Control.Monad.AWS.ViaMock
 
 import Prelude
 
+import Amazonka (AuthEnv (..))
 import Control.Monad.AWS.Class
 import Control.Monad.AWS.Matchers
 import Control.Monad.IO.Class (MonadIO)
@@ -76,3 +77,14 @@ newtype MockAWS m a = MockAWS
 instance (MonadIO m, MonadReader env m, HasMatchers env) => MonadAWS (MockAWS m) where
   sendEither = matchSend
   awaitEither = matchAwait
+  withAuth = ($ fakeAuthEnv)
+  modified _ = id
+
+fakeAuthEnv :: AuthEnv
+fakeAuthEnv =
+  AuthEnv
+    { accessKeyId = "mock-aws-access-key-id"
+    , secretAccessKey = "mock-aws-secret-key"
+    , sessionToken = Just "mock-aws-sessin-token"
+    , expiration = Nothing
+    }
