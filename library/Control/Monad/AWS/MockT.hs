@@ -45,6 +45,9 @@ import Control.Monad.AWS.ViaMock
 import Control.Monad.IO.Unlift
 import Control.Monad.Reader
 
+-- |
+--
+-- @since 0.1.0.0
 newtype MockT m a = MockT
   { unMockT :: ReaderT Matchers m a
   }
@@ -58,5 +61,8 @@ newtype MockT m a = MockT
     )
   deriving (MonadAWS) via (MockAWS (MockT m))
 
+-- |
+--
+-- @since 0.1.0.0
 runMockT :: MockT m a -> m a
 runMockT f = runReaderT (unMockT f) mempty

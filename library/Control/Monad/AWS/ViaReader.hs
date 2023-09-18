@@ -78,12 +78,21 @@ import Control.Monad.Reader
 import Control.Monad.Trans.Resource (MonadResource)
 import Data.Functor.Identity (runIdentity)
 
+-- |
+--
+-- @since 0.1.0.0
 class HasEnv env where
   envL :: Lens' env Env
 
+-- |
+--
+-- @since 0.1.0.0
 instance HasEnv Env where
   envL = id
 
+-- |
+--
+-- @since 0.1.0.0
 newtype ReaderAWS m a = ReaderAWS
   { unReaderAWS :: m a
   }

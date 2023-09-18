@@ -25,14 +25,18 @@ import Data.Typeable
 
 -- | Define a response to provide for any matched requests
 data Matcher where
-  -- Matches calls to 'send' where the given predicate holds
+  -- | Matches calls to 'send' where the given predicate holds
+  --
+  -- @since 0.1.0.0
   SendMatcher
     :: forall a
      . (AWSRequest a, Typeable a, Typeable (AWSResponse a))
     => (a -> Bool)
     -> Either Error (AWSResponse a)
     -> Matcher
-  -- Matches calls to 'await' where the given predicate holds
+  -- | Matches calls to 'await' where the given predicate holds
+  --
+  -- @since 0.1.0.0
   AwaitMatcher
     :: forall a
      . (AWSRequest a, Typeable a)
@@ -40,25 +44,41 @@ data Matcher where
     -> Either Error Waiter.Accept
     -> Matcher
 
+-- |
+--
+-- @since 0.1.0.0
 newtype Matchers = Matchers
   { unMatchers :: [Matcher]
   }
   deriving newtype (Semigroup, Monoid)
 
+-- |
+--
+-- @since 0.1.0.0
 class HasMatchers env where
   matchersL :: Lens' env Matchers
 
+-- |
+--
+-- @since 0.1.0.0
 instance HasMatchers Matchers where
   matchersL = id
 
 -- | Add a 'Matcher' for the duration of the block
+--
+-- @since 0.1.0.0
 withMatcher :: (MonadReader env m, HasMatchers env) => Matcher -> m a -> m a
 withMatcher = withMatchers . pure
 
 -- | Add multiple 'Matcher's for the duration of the block
+--
+-- @since 0.1.0.0
 withMatchers :: (MonadReader env m, HasMatchers env) => [Matcher] -> m a -> m a
 withMatchers ms = local $ matchersL <>~ Matchers ms
 
+-- |
+--
+-- @since 0.1.0.0
 matchSend
   :: forall m env a
    . ( MonadIO m
@@ -77,6 +97,9 @@ matchSend req = throwUnmatched @a =<< firstMatcher go
       cast resp
     AwaitMatcher {} -> Nothing
 
+-- |
+--
+-- @since 0.1.0.0
 matchAwait
   :: forall m env a
    . (MonadIO m, MonadReader env m, HasMatchers env, Typeable a)
@@ -99,6 +122,9 @@ firstMatcher f = do
   matchers <- view matchersL
   pure $ listToMaybe $ mapMaybe f $ unMatchers matchers
 
+-- |
+--
+-- @since 0.1.0.0
 newtype UnmatchedRequestError = UnmatchedRequestError
   { unmatchedRequestType :: String
   }
@@ -108,6 +134,8 @@ newtype UnmatchedRequestError = UnmatchedRequestError
 -- representation (derived is best), and displayException is where you make it
 -- human-readable. Sadly, too many tools (*cough* hspec) use show instead of
 -- displayException, and we want it to look nice there. Sigh.
+--
+-- https://github.com/hspec/hspec/issues/289
 instance Show UnmatchedRequestError where
   show ex =
     "Unexpected AWS request made within MockT: "
