@@ -69,12 +69,14 @@ module Control.Monad.AWS.ViaReader
 
 import Prelude
 
+import qualified Amazonka.Auth as Amazonka
 import Amazonka.Env
 import qualified Amazonka.Send as Amazonka
-import Control.Lens (Lens', view)
+import Control.Lens (Lens', to, view, (%~))
 import Control.Monad.AWS.Class
 import Control.Monad.Reader
 import Control.Monad.Trans.Resource (MonadResource)
+import Data.Functor.Identity (runIdentity)
 
 class HasEnv env where
   envL :: Lens' env Env
@@ -102,3 +104,9 @@ instance (MonadResource m, MonadReader env m, HasEnv env) => MonadAWS (ReaderAWS
   awaitEither w a = do
     env <- view envL
     Amazonka.awaitEither env w a
+
+  withAuth f = do
+    auth <- view $ envL . env_auth . to runIdentity
+    Amazonka.withAuth auth f
+
+  modified f = local $ envL %~ f
