@@ -80,11 +80,7 @@ newtype MockAWS m a = MockAWS
 instance (MonadIO m, MonadReader env m, HasMatchers env) => MonadAWS (MockAWS m) where
   sendEither = matchSend
   awaitEither = matchAwait
-
-  -- \| Run the given action with a fake 'AuthEnv'
   withAuth = ($ fakeAuthEnv)
-
-  -- \| Run the given action (there is no 'Env' to modify)
   localEnv _ = id
 
 fakeAuthEnv :: AuthEnv
