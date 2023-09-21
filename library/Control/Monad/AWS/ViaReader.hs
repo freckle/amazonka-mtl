@@ -118,4 +118,4 @@ instance (MonadResource m, MonadReader env m, HasEnv env) => MonadAWS (ReaderAWS
     auth <- view $ envL . env_auth . to runIdentity
     Amazonka.withAuth auth f
 
-  modified f = local $ envL %~ f
+  localEnv f = local $ envL %~ f

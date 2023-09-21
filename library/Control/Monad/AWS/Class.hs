@@ -23,7 +23,7 @@ import Data.Typeable (Typeable)
 -- - "Control.Monad.AWS.ViaReader"
 -- - "Control.Monad.AWS.ViaMock"
 class Monad m => MonadAWS m where
-  -- |
+  -- | The type-class version of 'Amazonka.sendEither'.
   --
   -- @since 0.1.0.0
   sendEither
@@ -31,7 +31,7 @@ class Monad m => MonadAWS m where
     => a
     -> m (Either Error (AWSResponse a))
 
-  -- |
+  -- | The type-class version of 'Amazonka.awaitEither'.
   --
   -- @since 0.1.0.0
   awaitEither
@@ -40,12 +40,15 @@ class Monad m => MonadAWS m where
     -> a
     -> m (Either Error Waiter.Accept)
 
-  -- |
+  -- | Supply the current credentials to the given action.
   --
   -- @since 0.1.1.0
   withAuth :: (AuthEnv -> m a) -> m a
 
-  -- |
+  -- | Run the given action with a modified 'Env'
+  --
+  -- For instances that supply 'Env' via Reader, this should behave like
+  -- 'local'.
   --
   -- @since 0.1.1.0
-  modified :: (Env -> Env) -> m a -> m a
+  localEnv :: (Env -> Env) -> m a -> m a
