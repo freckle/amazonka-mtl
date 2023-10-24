@@ -13,9 +13,11 @@
 -- spec = do
 --   describe "someAction" $ do
 --     it "works" $ do
---       let matcher = 'SendMatcher' (const True) -- match all calls
---            $ 'newListBucketsResponse'          -- return no buckets
---            & 'listBucketsResponse_buckets' ?~ []
+--       let matcher =
+--             'SendMatcher' (const @_ @ListBuckets True) -- match all calls
+--               $ Right
+--               $ 'newListBucketsResponse'               -- return no buckets
+--               & 'listBucketsResponse_buckets' ?~ []
 --
 --       names <- 'runMockT' $ 'withMatcher' matcher $ someAction
 --       names `shouldBe` []
