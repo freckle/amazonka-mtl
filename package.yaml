@@ -115,6 +115,7 @@ library:
     - mtl
     - resourcet
     - unliftio-core
+    - Blammo
 
 tests:
   spec:

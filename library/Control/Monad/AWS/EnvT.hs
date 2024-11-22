@@ -28,10 +28,14 @@ where
 
 import Prelude
 
+import Blammo.Logging (MonadLogger, MonadLoggerIO)
 import Control.Monad.AWS.Class
 import Control.Monad.AWS.ViaReader
+import Control.Monad.Except (MonadError)
 import Control.Monad.Reader
+import Control.Monad.State (MonadState)
 import Control.Monad.Trans.Resource
+import Control.Monad.Writer (MonadWriter)
 
 -- |
 --
@@ -47,8 +51,16 @@ newtype EnvT m a = EnvT
     , MonadUnliftIO
     , MonadResource
     , MonadReader Env
+    , MonadError e
+    , MonadState s
+    , MonadWriter w
+    , MonadLogger
+    , MonadLoggerIO
     )
   deriving (MonadAWS) via (ReaderAWS (EnvT m))
+
+instance MonadTrans EnvT where
+  lift = EnvT . lift . lift
 
 -- |
 --
