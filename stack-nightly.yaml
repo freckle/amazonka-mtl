@@ -1,1 +1,8 @@
-resolver: nightly-2023-09-09
+resolver: nightly-2023-12-26
+extra-deps:
+  - crypton-1.0.0
+  - amazonka-2.0
+  - amazonka-core-2.0
+  - amazonka-sso-2.0
+  - amazonka-sts-2.0
+  - amazonka-s3-2.0
