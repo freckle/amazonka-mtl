@@ -112,6 +112,7 @@ library:
     - amazonka-core
     - conduit
     - lens
+    - monad-logger
     - mtl
     - resourcet
     - unliftio-core
