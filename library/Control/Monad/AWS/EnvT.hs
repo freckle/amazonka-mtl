@@ -28,7 +28,7 @@ where
 
 import Prelude
 
-import Blammo.Logging (MonadLogger, MonadLoggerIO)
+import Control.Monad.Logger (MonadLogger, MonadLoggerIO)
 import Control.Monad.AWS.Class
 import Control.Monad.AWS.ViaReader
 import Control.Monad.Except (MonadError)

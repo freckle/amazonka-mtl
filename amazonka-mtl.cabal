@@ -107,12 +107,12 @@ library
       TypeFamilies
   ghc-options: -Weverything -Wno-all-missed-specialisations -Wno-missed-specialisations -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-safe -Wno-unsafe
   build-depends:
-      Blammo
-    , amazonka
+      amazonka
     , amazonka-core
     , base <5
     , conduit
     , lens
+    , monad-logger
     , mtl
     , resourcet
     , unliftio-core
