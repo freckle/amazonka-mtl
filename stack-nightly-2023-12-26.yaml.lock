@@ -5,13 +5,6 @@
 
 packages:
 - completed:
-    hackage: crypton-1.0.0@sha256:637e58581978c84ef1288d14fa9cac1d2905ef60e319924293bc11250aca882d,14527
-    pantry-tree:
-      sha256: 4b5e5511567c0fe735a224cb8b2b278e1caa79344f2940d030d169e69b1b81e1
-      size: 23275
-  original:
-    hackage: crypton-1.0.0
-- completed:
     hackage: amazonka-2.0@sha256:d401ac9094bb331d1bfb9be879d9007ca6bc94085ab745de5aa827128ad7917c,3522
     pantry-tree:
       sha256: b9fa0aaccff472ac93200d505678fb560ce15a9e409bdff61e1a3e08ed89d344
@@ -25,6 +18,13 @@ packages:
       size: 3222
   original:
     hackage: amazonka-core-2.0
+- completed:
+    hackage: amazonka-s3-2.0@sha256:1d93bec43e0fc9bc3a57c43aeeb010c74a60afd3af5acd077731aad923f99802,13870
+    pantry-tree:
+      sha256: 0b88c93134287ca43f169d2163acce45700bab1ea81e97f11de4d4330db7c9fa
+      size: 38690
+  original:
+    hackage: amazonka-s3-2.0
 - completed:
     hackage: amazonka-sso-2.0@sha256:dfb9232d66fac2a912f63aa5ddaf56ea495649cc3ab451b5102f8ec579dedc4f,3012
     pantry-tree:
@@ -40,12 +40,12 @@ packages:
   original:
     hackage: amazonka-sts-2.0
 - completed:
-    hackage: amazonka-s3-2.0@sha256:1d93bec43e0fc9bc3a57c43aeeb010c74a60afd3af5acd077731aad923f99802,13870
+    hackage: crypton-1.0.0@sha256:637e58581978c84ef1288d14fa9cac1d2905ef60e319924293bc11250aca882d,14527
     pantry-tree:
-      sha256: 0b88c93134287ca43f169d2163acce45700bab1ea81e97f11de4d4330db7c9fa
-      size: 38690
+      sha256: 4b5e5511567c0fe735a224cb8b2b278e1caa79344f2940d030d169e69b1b81e1
+      size: 23275
   original:
-    hackage: amazonka-s3-2.0
+    hackage: crypton-1.0.0
 snapshots:
 - completed:
     sha256: b69a06c70e1092e2aa60ce69a4877c6181fbe53dfb7ea041cb98d97617d6007f
