@@ -37,12 +37,12 @@
 --       bucketC = newBucket now "c-bucket"
 --       buckets = [bucketA, bucketB, bucketC]
 --       matcher =
---         SendMatcher (== newListBuckets)
+--         'SendMatcher' (== newListBuckets)
 --          $ Right
 --          $ newListBucketsResponse 200
 --          & listBucketsResponse_buckets ?~ buckets
 --
---     withMatcher matcher $ do
+--     'withMatcher' matcher $ do
 --       buckets <- getBucketsByPrefix "b-"
 --       buckets `shouldBe` [bucketB]
 -- @
