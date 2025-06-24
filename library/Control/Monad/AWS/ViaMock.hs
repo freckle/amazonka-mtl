@@ -20,7 +20,7 @@
 --    $ maybe [] (filter matchesPrefix)
 --    $ resp ^. listBucketsResponse_buckets
 --  where
---   matchesPrefix b = p `T.isPrefixOf` toText (b ^. bucket_name)
+--   matchesPrefix b = p \`T.isPrefixOf\` toText (b ^. bucket_name)
 -- @
 --
 -- And assuming you've set up your example monad with 'MonadAWS' via 'MockAWS',
