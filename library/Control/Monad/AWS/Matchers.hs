@@ -1,5 +1,14 @@
 {-# LANGUAGE AllowAmbiguousTypes #-}
 
+-- | Predicates for matching AWS requests when mocking in tests
+--
+-- A 'Matcher' is effectively a predicate for an AWS request. It's expected that
+-- your tests run in a reader-like monad and implements 'HasMatchers' for its
+-- environment. You can then use 'withMatcher' or 'withMatchers' to add mocked
+-- responses when matching requests are made within the implementation under
+-- test.
+--
+-- See also the example in "Control.Monad.AWS.ViaMock".
 module Control.Monad.AWS.Matchers
   ( Matchers
   , HasMatchers (..)
