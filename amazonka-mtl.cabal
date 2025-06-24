@@ -1,11 +1,11 @@
 cabal-version: 1.18
 
--- This file has been generated from package.yaml by hpack version 0.37.0.
+-- This file has been generated from package.yaml by hpack version 0.38.0.
 --
 -- see: https://github.com/sol/hpack
 
 name:           amazonka-mtl
-version:        0.1.1.0
+version:        0.1.1.1
 synopsis:       MTL-style type-class and deriving-via newtypes for Amazonka
 description:    This package allows incorporation of AWS actions into any MTL-style function,
                 .
