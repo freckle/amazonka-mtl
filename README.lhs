@@ -21,7 +21,6 @@ import Prelude
 
 import Amazonka.S3 (BucketName)
 import Control.Monad.Reader (MonadReader)
-import Text.Markdown.Unlit ()
 ```
 -->
 
