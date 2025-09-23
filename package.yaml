@@ -141,5 +141,6 @@ tests:
       - amazonka-s3
       - conduit
       - lens
-      - markdown-unlit
       - mtl
+    build-tools:
+      - markdown-unlit
